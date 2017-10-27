@@ -10,7 +10,7 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.containerView}>
-        <Text style={styles.nameLabel}>Nimi: </Text>
+        <Text style={styles.nameLabel}>Name: </Text>
         <TextInput
           style={styles.nameInput}
           placeholder='Name'
