@@ -1,32 +1,76 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, TextInput, View, Button, Alert } from 'react-native';
 
-export default class App extends React.Component {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {text: ''};
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.baseText}>App Template</Text>
-        <Text style={styles.baseText}></Text>
-        <Text style={styles.baseText}></Text>
+      <View style={styles.containerView}>
+        <Text style={styles.nameLabel}>Nimi: </Text>
+        <TextInput
+          style={styles.nameInput}
+          placeholder='Name'
+          onChangeText={(text) => this.setState({text})}
+        />
+        <View style={styles.buttonRow}>
+          <View style={styles.saveButtonContainer}>
+              <Button
+                color='#fff'
+                onPress={() => {Alert.alert('Saved')}}
+                title='Save'
+                />
+          </View>
+          <View style={styles.cancelButtonContainer}>
+            <Button
+              color='#fff'
+              onPress={() => {Alert.alert('Canceled')}}
+              title='Cancel'
+              />
+          </View>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 400
+  },
+  cancelButtonContainer: {
+    paddingTop: 7,
+    paddingBottom: 7,
+    width: 163,
+    backgroundColor: '#BDBDBD',
+    borderRadius: 5
+  },
   container: {
-    flex: 1,
-    backgroundColor: '#009688',
-    alignItems: 'center',
-    justifyContent: 'center',
+   flex: 1,
+   justifyContent: 'center'
   },
-  baseText: {
-    fontFamily: 'Helvetica Neue',
-    fontSize: 40,
-    color: '#fff',
+  containerView: {
+    paddingTop: 40,
+    paddingLeft: 20,
+    paddingRight: 20
   },
-  titleText: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  nameInput: {
+    fontSize: 24
+  },
+  nameLabel: {
+    fontSize: 24
+  },
+  saveButtonContainer: {
+    margin: 0,
+    paddingTop: 7,
+    paddingBottom: 7,
+    backgroundColor: '#2196F3',
+    width: 163,
+    borderRadius: 5
   }
 });
