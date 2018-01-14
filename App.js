@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, Alert } from 'react-native';
+import { Dimensions, StyleSheet, Text, TextInput, View, Button, Alert, WebView } from 'react-native';
 
 export default class App extends Component {
   constructor(props) {
@@ -9,35 +9,35 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={styles.containerView}>
-        <Text style={styles.nameLabel}>Name: </Text>
-        <TextInput
-          style={styles.nameInput}
-          placeholder='Name'
-          onChangeText={(text) => this.setState({text})}
+        <WebView
+          source={{uri: 'https://www.google.fi'}}
+          // Injecting javasript to WebView
+          // injectedJavaScript={'alert("Testing!");'}
+
+          style={styles.video}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          startInLoadingState={true}
         />
-        <View style={styles.buttonRow}>
-          <View style={styles.saveButtonContainer}>
-              <Button
-                color='#fff'
-                onPress={() => {Alert.alert('Saved')}}
-                title='Save'
-                />
-          </View>
-          <View style={styles.cancelButtonContainer}>
-            <Button
-              color='#fff'
-              onPress={() => {Alert.alert('Canceled')}}
-              title='Cancel'
-              />
-          </View>
-        </View>
-      </View>
     );
   }
 }
 
+const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  video: {
+    marginTop: 30,
+    height: deviceHeight,
+    width: deviceWidth,
+    flex: 1
+  },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     paddingTop: 7,
     paddingBottom: 7,
     width: 163,
-    backgroundColor: '#BDBDBD',
+    backgroundColor: '#bdbdbd',
     borderRadius: 5
   },
   container: {
@@ -59,6 +59,12 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20
   },
+  forgeContainer: {
+    backgroundColor: '#aaf',
+    height: 300,
+    width: 200,
+    flex: 1
+  },
   nameInput: {
     fontSize: 24
   },
@@ -69,7 +75,7 @@ const styles = StyleSheet.create({
     margin: 0,
     paddingTop: 7,
     paddingBottom: 7,
-    backgroundColor: '#2196F3',
+    backgroundColor: '#2196f3',
     width: 163,
     borderRadius: 5
   }
